@@ -6,16 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="scepter-communication" />
         <module name="scepter-message-protocol" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="scepter" target="1.8" />
+      <module name="scepter-communication" target="1.8" />
       <module name="scepter-message-protocol" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="scepter-communication" options="-parameters" />
       <module name="scepter-message-protocol" options="-parameters" />
     </option>
   </component>
