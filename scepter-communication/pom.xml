@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.kevin</groupId>
             <artifactId>scepter-message-protocol</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${message_protocol_version}</version>
         </dependency>
         <!-- json -->
         <dependency>

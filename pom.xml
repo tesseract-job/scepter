@@ -7,6 +7,7 @@
         <module>scepter-message-protocol</module>
         <module>scepter-client</module>
         <module>scepter-sample</module>
+        <module>scepter-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

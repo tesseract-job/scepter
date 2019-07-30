@@ -1,8 +1,8 @@
 package com.kevin.sceptercommunication.test;
 
-import com.kevin.sceptercommunication.core.NettyBootstrap;
-import com.kevin.sceptercommunication.core.config.SocketServerConfig;
-import com.kevin.sceptercommunication.core.hotkey.DefaultProxyFactory;
+import com.kevin.communication.core.NettyBootstrap;
+import com.kevin.communication.core.config.SocketServerConfig;
+import com.kevin.communication.core.hotkey.DefaultProxyFactory;
 
 public class ServerClient {
 
