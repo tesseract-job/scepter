@@ -12,7 +12,7 @@ public class TestCommandImpl implements ITestCommand {
 	private IServiceRemote serviceRemote;
 	@Override
 	public void sayHello() {
-		System.out.println(serviceRemote.sayHello("abc" , 101));
+		System.out.println("sayHello返回的数据"+serviceRemote.sayHello("abc" , 101));
 	}
 
 	@Override
