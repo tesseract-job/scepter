@@ -23,7 +23,9 @@ import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -56,21 +58,26 @@ public final class SocketServer {
     }
 
     private void initServer() throws InterruptedException {
-        bootstrap = new Bootstrap(); // 客户端引导类
-        bootstrap.group(this.eventLoopGroup);// 多线程处理
-        bootstrap.channel(NioSocketChannel.class);// 指定通道类型为NioServerSocketChannel，一种异步模式，OIO阻塞模式为OioServerSocketChannel
+        // 客户端引导类
+        bootstrap = new Bootstrap();
+        // 多线程处理
+        bootstrap.group(this.eventLoopGroup);
+        // 指定通道类型为NioServerSocketChannel，一种异步模式，OIO阻塞模式为OioServerSocketChannel
+        bootstrap.channel(NioSocketChannel.class);
         bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-        bootstrap.option(ChannelOption.TCP_NODELAY, true);//禁用Nagle算法
-        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);//连接超时
+        //禁用Nagle算法
+        bootstrap.option(ChannelOption.TCP_NODELAY, true);
+        //连接超时
+        bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
         bootstrap.option(ChannelOption.SO_TIMEOUT, 5000);
-        bootstrap.remoteAddress(new InetSocketAddress(config.getServerHost(), config.getServerPort()));// 指定请求地址
+        // 指定请求地址
+        bootstrap.remoteAddress(new InetSocketAddress(config.getServerHost(), config.getServerPort()));
         bootstrap.handler(new ChannelInitializer<NioSocketChannel>() {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
                 ChannelPipeline pipeline = ch.pipeline();
 
                 IMessageProcessor messageProcessor = new SocketMessageProcessor();
-
                 pipeline.addLast(new DelimiterBasedFrameDecoder(ProtocolConst.MAX_FRAME_LENGTH, true, Unpooled.copiedBuffer(ProtocolConst.P_END_TAG)));
                 pipeline.addLast(new MessageDecoder());
                 pipeline.addLast(new MessageEncoder());
@@ -80,7 +87,17 @@ public final class SocketServer {
                 pipeline.addLast(new ClientMessageHandler(messageProcessor));
             }
         });
+        LOGGER.info("端口为："+config.getClientPort());
+//        ChannelFuture f = bootstrap.bind(config.getClientPort());
 
+        InetAddress localHost = null;
+        try {
+            localHost = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+//        bootstrap.connect();
+//        bootstrap.bind(new InetSocketAddress(localHost.getHostAddress(), config.getClientPort()));
         ChannelFuture f = bootstrap.connect();
         f.addListener(new ChannelFutureListener() {
 

@@ -47,7 +47,8 @@ public class DefaultSession implements ISession {
         this.ctx = ctx;
         this.deviceId = deviceId;
         this.requestTimeout = Global.getInstance().getClientConfig().getRequestTimeout();
-        this.status = DeviceStatus.IDLE;//默认空闲状态
+        //默认空闲状态
+        this.status = DeviceStatus.IDLE;
     }
 
     @Override

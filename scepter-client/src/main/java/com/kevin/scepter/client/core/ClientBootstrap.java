@@ -10,6 +10,8 @@ import com.kevin.scepter.client.core.session.ISessionConnectionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.UnknownHostException;
+
 /**
  * @author: liangxuekai
  * @description: 客户端启动类
@@ -41,7 +43,7 @@ public final class ClientBootstrap {
      *
      * @throws InterruptedException
      */
-    public void start() throws InterruptedException {
+    public void start() throws InterruptedException, UnknownHostException {
         LOGGER.info("----------------------start client netty server------------------");
 
         //加载guice注入服务
@@ -65,7 +67,7 @@ public final class ClientBootstrap {
      *
      * @throws InterruptedException
      */
-    private void loadServer() throws InterruptedException {
+    private void loadServer() throws InterruptedException, UnknownHostException {
         SocketServer server = new SocketServer();
         server.start();
     }

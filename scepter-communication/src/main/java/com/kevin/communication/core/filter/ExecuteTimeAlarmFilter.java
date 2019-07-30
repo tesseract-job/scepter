@@ -21,7 +21,8 @@ public class ExecuteTimeAlarmFilter implements IFilter {
         SocketServerConfig config = Global.getInstance().getServiceConfig();
         if (config.isSlowMethod()) {
             long cost = context.getInvokeEndTime() - context.getInvokeBeginTime();
-            if (cost >= config.getSlowMethodMillis()) {//调用超过指定毫秒，打印日志
+            //调用超过指定毫秒，打印日志
+            if (cost >= config.getSlowMethodMillis()) {
                 String msg = "time:" + cost + "ms, remoteIP:" + context.getRemoteIP() + ", mapping:" + context.getMapping();
 
                 LOGGER.warn(msg);

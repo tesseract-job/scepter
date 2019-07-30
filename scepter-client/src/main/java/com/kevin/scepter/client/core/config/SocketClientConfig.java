@@ -18,10 +18,16 @@ public final class SocketClientConfig {
      */
     private String serverHost;
 
+
     /**
      * 服务端口
      */
     private int serverPort;
+
+    /**
+     * 客户端端口
+     */
+    private int clientPort;
 
     /**
      * 需要扫描的代理包路径
@@ -138,6 +144,15 @@ public final class SocketClientConfig {
             throw new IllegalArgumentException("asyncRequestTimeout Must be greater than zero!");
         }
         this.asyncRequestTimeout = asyncRequestTimeout;
+    }
+
+
+    public int getClientPort() {
+        return clientPort;
+    }
+
+    public void setClientPort(int clientPort) {
+        this.clientPort = clientPort;
     }
 
 }

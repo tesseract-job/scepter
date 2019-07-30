@@ -92,9 +92,12 @@ public class SocketServer implements IServer {
                     //针对主线程的配置
                     .option(ChannelOption.SO_BACKLOG, ServerConstant.DEFAULT_SOCKET_BACKLOG)
                     //针对子线程的配置
-                    .childOption(ChannelOption.TCP_NODELAY, ServerConstant.DEFAULT_SOCKET_NODELAY)//禁用Nagle算法
-                    .childOption(ChannelOption.SO_RCVBUF, ServerConstant.DEFAULT_SOCKET_RCVBUF)//socket server receive buffer size:1024 * 64
-                    .childOption(ChannelOption.SO_SNDBUF, ServerConstant.DEFAULT_SOCKET_SNDBUF)//socket server send buffer size:1024 * 64
+                    .childOption(ChannelOption.TCP_NODELAY, ServerConstant.DEFAULT_SOCKET_NODELAY)
+                    //禁用Nagle算法
+                    .childOption(ChannelOption.SO_RCVBUF, ServerConstant.DEFAULT_SOCKET_RCVBUF)
+                    //socket server receive buffer size:1024 * 64
+                    .childOption(ChannelOption.SO_SNDBUF, ServerConstant.DEFAULT_SOCKET_SNDBUF)
+                    //socket server send buffer size:1024 * 64
                     .childOption(ChannelOption.SO_KEEPALIVE, ServerConstant.DEFAULT_SOCKET_KEEPALIVE);
 
             // Bind and start to accept incoming connections.

@@ -40,7 +40,8 @@ public class DefaultSession implements Session {
     public DefaultSession(ChannelHandlerContext ctx, String deviceId) {
         this.ctx = ctx;
         this.deviceId = deviceId;
-        this.status = DeviceStatus.IDLE;//默认空闲状态
+        //默认空闲状态
+        this.status = DeviceStatus.IDLE;
     }
 
     @Override

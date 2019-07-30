@@ -1,5 +1,6 @@
 package com.kevin.communication.core.session;
 
+import com.alibaba.fastjson.JSON;
 import com.kevin.communication.core.config.ServerConstant;
 import com.kevin.message.protocol.message.HeartBeatMessage;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.SocketAddress;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,7 +26,9 @@ final class SessionManager {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SessionManager.class);
 
-    // 设备ID
+    /**
+     * 设备ID
+     */
     public static final AttributeKey<String> ATTR_KEY_DEVICEID = AttributeKey.valueOf("DEVICEID");
 
     private static final SessionManager INSTANCE = new SessionManager();
@@ -59,6 +63,8 @@ final class SessionManager {
         }
 
         session = new DefaultSession(ctx, deviceId);
+        SocketAddress socketAddress = ctx.channel().remoteAddress();
+        LOGGER.info("这是地址"+JSON.toJSONString(socketAddress));
         sessionMap.put(deviceId, session);
         //将设备ID绑定到channel上
         ctx.channel().attr(SessionManager.ATTR_KEY_DEVICEID).set(deviceId);
