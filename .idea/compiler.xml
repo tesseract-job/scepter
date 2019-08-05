@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="client-sample" />
         <module name="scepter-client" />
         <module name="scepter-message-protocol" />
         <module name="scepter-server" />
+        <module name="server-sample" />
         <module name="spring-boot-scepter-server-test" />
         <module name="spring-boot-starter-scepter-client" />
         <module name="spring-boot-starter-scepter-server" />
@@ -16,11 +18,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="client-sample" target="1.8" />
       <module name="scepter" target="1.8" />
       <module name="scepter-client" target="1.8" />
       <module name="scepter-message-protocol" target="1.8" />
       <module name="scepter-sample" target="1.5" />
       <module name="scepter-server" target="1.8" />
+      <module name="server-sample" target="1.8" />
       <module name="spring-boot-scepter-server-test" target="1.8" />
       <module name="spring-boot-starter-scepter-client" target="1.8" />
       <module name="spring-boot-starter-scepter-server" target="1.8" />

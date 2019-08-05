@@ -1,11 +1,10 @@
-package com.kevin.sceptercommunication.server.vo;
+package com.kevin.scepter.server.test.server.vo;
 
 import lombok.Data;
 
 /**
  * @projectName: scepter
  * @className: Person
- * @description: TODO push前删除这个TODO,并添加对应注释,如果liangxuekai忘了,拉出去弹小丁丁
  * @author: liangxuekai
  * @createDate: 2019-07-30 14:09
  * @updateUser: liangxuekai

@@ -1,12 +1,12 @@
-package com.kevin.sceptercommunication.server.command;
+package com.kevin.scepter.server.test.server.command;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kevin.message.protocol.message.RequestMessage;
-import com.kevin.message.protocol.utility.FastJsonHelper;
 import com.kevin.communication.core.hotkey.Command;
 import com.kevin.communication.core.hotkey.CommandMapping;
-import com.kevin.sceptercommunication.server.vo.Person;
-import com.kevin.sceptercommunication.server.vo.TestVO;
+import com.kevin.message.protocol.message.RequestMessage;
+import com.kevin.message.protocol.utility.FastJsonHelper;
+import com.kevin.scepter.server.test.server.vo.Person;
+import com.kevin.scepter.server.test.server.vo.TestVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

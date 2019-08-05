@@ -1,4 +1,4 @@
-package com.kevin.sceptercommunication.server.vo;
+package com.kevin.scepter.server.test.server.vo;
 
 public class TestVO {
 	

@@ -8,6 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>spring-boot-scepter-client-test</module>
+        <module>server-sample</module>
+		<module>client-sample</module>
 	</modules>
 	<name>spring-boot-starter-scepter-client-test</name>
 	<description>Demo project for Spring Boot</description>
