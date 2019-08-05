@@ -15,7 +15,7 @@ public class SystemUtils {
      */
     public static boolean isMacOs() {
         String os = System.getProperties().getProperty("os.name");
-        return os.equalsIgnoreCase("Mac OS X");
+        return "Mac OS X".equalsIgnoreCase(os);
     }
 
     /**

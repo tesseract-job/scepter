@@ -71,7 +71,7 @@ public class ClientConfiguration {
 
         singleThreadPool.execute(() -> {
             try {
-
+                client.start();
             } catch (Exception e) {
                 LOGGER.error(e.getMessage(), e);
             }

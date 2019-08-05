@@ -11,6 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-boot-starter-scepter-client</artifactId>
+    <groupId>com.kevin</groupId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <!-- Common libs -->
