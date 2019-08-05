@@ -69,7 +69,8 @@ public class SocketServer implements IServer {
             //采用主从模式，设置好boss线程和worker线程
             b.group(bossGroup, workerGroup)
                     //主线程处理类
-                    .channel(NioServerSocketChannel.class)//指定NIO的模式
+                    //指定NIO的模式
+                    .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     //子线程处理类
                     .childHandler(new ChannelInitializer<SocketChannel>() {

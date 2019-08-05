@@ -3,11 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>scepter-communication</module>
+        <module>scepter-server</module>
         <module>scepter-message-protocol</module>
         <module>scepter-client</module>
         <module>scepter-sample</module>
         <module>scepter-client</module>
+        <module>spring-boot-starter-scepter-server</module>
+        <module>spring-boot-starter-scepter-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
