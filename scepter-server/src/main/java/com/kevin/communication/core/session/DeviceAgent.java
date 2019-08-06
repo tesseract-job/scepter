@@ -2,6 +2,8 @@ package com.kevin.communication.core.session;
 
 import com.kevin.message.protocol.enums.DeviceStatus;
 
+import java.net.SocketAddress;
+
 /**
  * @author: liangxuekai
  * @description: 设备信息对外接口
@@ -13,21 +15,21 @@ public final class DeviceAgent {
     /**
      * 判断设备是否已连接
      *
-     * @param deviceId - 设备ID
+     * @param socketAddress - 设备地址
      * @return boolean
      */
-    public static final boolean isConnection(String deviceId) {
-        return SessionManager.getInstance().getSession(deviceId) != null;
+    public static final boolean isConnection(SocketAddress socketAddress) {
+        return SessionManager.getInstance().getSession(socketAddress) != null;
     }
 
     /**
      * 获得当前设备的状态信息
      *
-     * @param deviceId - 设备ID
+     * @param socketAddress - 设备地址
      * @return DeviceStatus
      */
-    public static final DeviceStatus getDeviceStatus(String deviceId) {
-        Session session = SessionManager.getInstance().getSession(deviceId);
+    public static final DeviceStatus getDeviceStatus(SocketAddress socketAddress) {
+        Session session = SessionManager.getInstance().getSession(socketAddress);
         if (session == null) {
             return DeviceStatus.UNKNOWN;
         }
@@ -38,13 +40,13 @@ public final class DeviceAgent {
     /**
      * 修改设备的当前状态
      *
-     * @param deviceId - 设备ID
+     * @param socketAddress - 设备地址
      * @param status   - DeviceStatus
      * @throws InterruptedException
      * @throws SessionException
      */
-    public static final void changeDeviceStatus(String deviceId, DeviceStatus status) throws InterruptedException, SessionException {
-        Session session = SessionManager.getInstance().getSession(deviceId);
+    public static final void changeDeviceStatus(SocketAddress socketAddress, DeviceStatus status) throws InterruptedException, SessionException {
+        Session session = SessionManager.getInstance().getSession(socketAddress);
         if (session == null) {
             throw new SessionException("current client session is null");
         }

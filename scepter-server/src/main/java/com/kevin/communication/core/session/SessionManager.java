@@ -33,7 +33,7 @@ final class SessionManager {
 
     private static final SessionManager INSTANCE = new SessionManager();
 
-    private Map<String, Session> sessionMap = new ConcurrentHashMap<>(ServerConstant.DEFAULT_SESSION_INIT_SIZE);
+    private Map<SocketAddress, Session> sessionMap = new ConcurrentHashMap<>(ServerConstant.DEFAULT_SESSION_INIT_SIZE);
 
     private SessionManager() {
     }
@@ -52,8 +52,9 @@ final class SessionManager {
     public Session createSession(ChannelHandlerContext ctx, HeartBeatMessage msg) {
         String deviceId = msg.getDeviceId();
         LOGGER.info("CONNECT deviceId <{}> for gateway", deviceId);
+        SocketAddress socketAddress = ctx.channel().remoteAddress();
         // 如果该设备已经存在，则关闭掉，重新建立一个新通道
-        Session session = sessionMap.get(deviceId);
+        Session session = sessionMap.get(socketAddress);
         if (session != null) {
             //如果通道是一个，则不管
             if (session.getCtx() != ctx) {
@@ -63,9 +64,8 @@ final class SessionManager {
         }
 
         session = new DefaultSession(ctx, deviceId);
-        SocketAddress socketAddress = ctx.channel().remoteAddress();
-        LOGGER.info("这是地址"+JSON.toJSONString(socketAddress));
-        sessionMap.put(deviceId, session);
+        LOGGER.info("这是地址" + JSON.toJSONString(socketAddress));
+        sessionMap.put(socketAddress, session);
         //将设备ID绑定到channel上
         ctx.channel().attr(SessionManager.ATTR_KEY_DEVICEID).set(deviceId);
 
@@ -93,22 +93,21 @@ final class SessionManager {
      * @return Session
      */
     public Session getSession(ChannelHandlerContext ctx) {
-        String deviceId = getDeviceId(ctx);
-        if (!StringUtils.isBlank(deviceId)) {
-            return getSession(deviceId);
+        SocketAddress socketAddress = ctx.channel().remoteAddress();
+        if (socketAddress != null) {
+            return getSession(socketAddress);
         }
-
         return null;
     }
 
     /**
      * 获取session
      *
-     * @param deviceId - 设备ID
+     * @param socketAddress - 设备地址
      * @return Session
      */
-    public Session getSession(String deviceId) {
-        return sessionMap.get(deviceId);
+    public Session getSession(SocketAddress socketAddress) {
+        return sessionMap.get(socketAddress);
     }
 
     /**
@@ -117,17 +116,17 @@ final class SessionManager {
      * @param deviceIds - 设备ID
      * @return Set<Session>
      */
-    public Set<Session> getSessions(String... deviceIds) {
-        if (deviceIds == null || deviceIds.length == 0) {
-            return Collections.emptySet();
-        }
-
-        Set<Session> sessions = new HashSet<>();
-        for (String deviceId : deviceIds) {
-            sessions.add(sessionMap.get(deviceId));
-        }
-        return sessions;
-    }
+//    public Set<Session> getSessions(String... deviceIds) {
+//        if (deviceIds == null || deviceIds.length == 0) {
+//            return Collections.emptySet();
+//        }
+//
+//        Set<Session> sessions = new HashSet<>();
+//        for (String deviceId : deviceIds) {
+//            sessions.add(sessionMap.get(deviceId));
+//        }
+//        return sessions;
+//    }
 
     /**
      * 从session管理器中移除
@@ -135,10 +134,10 @@ final class SessionManager {
      * @param session - Session
      */
     public void removeSession(Session session) {
-        String deviceId = session.getDeviceId();
+        SocketAddress socketAddress = session.getCtx().channel().remoteAddress();
         //不管怎样，先移除走
-        if (deviceId != null) {
-            sessionMap.remove(deviceId);
+        if (socketAddress != null) {
+            sessionMap.remove(socketAddress);
         }
     }
 
@@ -147,12 +146,12 @@ final class SessionManager {
      *
      * @param deviceId - deviceId
      */
-    public void removeSession(String deviceId) {
-        //不管怎样，先移除走
-        if (deviceId != null) {
-            sessionMap.remove(deviceId);
-        }
-    }
+//    public void removeSession(String deviceId) {
+//        //不管怎样，先移除走
+//        if (deviceId != null) {
+//            sessionMap.remove(deviceId);
+//        }
+//    }
 
     /**
      * 获得ChannelHandlerContext绑定的设备ID
