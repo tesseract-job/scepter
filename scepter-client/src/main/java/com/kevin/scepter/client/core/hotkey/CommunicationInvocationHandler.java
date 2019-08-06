@@ -87,8 +87,8 @@ public class CommunicationInvocationHandler implements InvocationHandler {
                 }
             }
         }
-
-        if (!methodInfo.isSync()) {//异步调用
+        //异步调用
+        if (!methodInfo.isSync()) {
             if (methodInfo.isFuture()) {
                 Protocol p = createRequestMessage(methodInfo, args);
                 //创建Future对象
@@ -102,7 +102,8 @@ public class CommunicationInvocationHandler implements InvocationHandler {
                         return message;
                     }
                 }, callBacks, true);
-                return f;//返回Future对象
+                //返回Future对象
+                return f;
             } else {
                 SessionFactory.getSession().requestAsync(createRequestMessage(methodInfo, args), new IReturnHandlerListener() {
 
@@ -171,7 +172,8 @@ public class CommunicationInvocationHandler implements InvocationHandler {
                 //复杂对象需要判断是否有参数名称
                 String[] paramNames = methodInfo.getParamNames();
                 if (paramNames == null || paramNames.length == 0) {
-                    if (args[0].getClass() == String.class) {//如果是String，并且没有@Param注解，则直接当JSON发送出去
+                    //如果是String，并且没有@Param注解，则直接当JSON发送出去
+                    if (args[0].getClass() == String.class) {
                         request.setBody((String) args[0]);
                     } else {
                         request.setBody(FastJsonHelper.toJson(args[0]));

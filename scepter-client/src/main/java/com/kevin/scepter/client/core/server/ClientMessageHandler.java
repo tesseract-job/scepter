@@ -31,10 +31,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<Protocol> 
         MessageType mt = p.getMessageType();
         switch (mt) {
             case Request:
+                //服务端直接push的数据
                 messageProcessor.processReceiveRequestMessage(ctx, p);
                 break;
             case Response:
                 //TODO 此处是否需要检查合法性？？
+                //客户端发送，服务端响应的数据
                 messageProcessor.processReceiveResponseMessage(ctx, p);
                 break;
             case Exception:
