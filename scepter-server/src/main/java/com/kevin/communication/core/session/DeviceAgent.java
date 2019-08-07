@@ -1,6 +1,8 @@
 package com.kevin.communication.core.session;
 
+import com.kevin.communication.utils.CreateSessionKey;
 import com.kevin.message.protocol.enums.DeviceStatus;
+import io.netty.channel.ChannelHandlerContext;
 
 import java.net.SocketAddress;
 
@@ -15,21 +17,26 @@ public final class DeviceAgent {
     /**
      * 判断设备是否已连接
      *
-     * @param socketAddress - 设备地址
+     * @param ctx - 设备地址
      * @return boolean
      */
-    public static final boolean isConnection(SocketAddress socketAddress) {
-        return SessionManager.getInstance().getSession(socketAddress) != null;
+    public static final boolean isConnection(ChannelHandlerContext ctx) {
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(ctx);
+        if (key != null) {
+            return SessionManager.getInstance().getSession(key) != null;
+        }
+        return false;
     }
 
     /**
      * 获得当前设备的状态信息
      *
-     * @param socketAddress - 设备地址
+     * @param ctx - 设备地址
      * @return DeviceStatus
      */
-    public static final DeviceStatus getDeviceStatus(SocketAddress socketAddress) {
-        Session session = SessionManager.getInstance().getSession(socketAddress);
+    public static final DeviceStatus getDeviceStatus(ChannelHandlerContext ctx) {
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(ctx);
+        Session session = SessionManager.getInstance().getSession(key);
         if (session == null) {
             return DeviceStatus.UNKNOWN;
         }
@@ -40,13 +47,15 @@ public final class DeviceAgent {
     /**
      * 修改设备的当前状态
      *
-     * @param socketAddress - 设备地址
-     * @param status   - DeviceStatus
+     * @param ctx    - 设备地址
+     * @param status - DeviceStatus
      * @throws InterruptedException
      * @throws SessionException
      */
-    public static final void changeDeviceStatus(SocketAddress socketAddress, DeviceStatus status) throws InterruptedException, SessionException {
-        Session session = SessionManager.getInstance().getSession(socketAddress);
+    public static final void changeDeviceStatus(ChannelHandlerContext ctx, DeviceStatus status) throws
+            InterruptedException, SessionException {
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(ctx);
+        Session session = SessionManager.getInstance().getSession(key);
         if (session == null) {
             throw new SessionException("current client session is null");
         }

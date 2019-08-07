@@ -27,6 +27,7 @@
       <module name="server-sample" target="1.8" />
       <module name="spring-boot-scepter-server-test" target="1.8" />
       <module name="spring-boot-starter-scepter-client" target="1.8" />
+      <module name="spring-boot-starter-scepter-client-test" target="1.5" />
       <module name="spring-boot-starter-scepter-server" target="1.8" />
       <module name="springboot-scepter-client-test" target="1.8" />
     </bytecodeTargetLevel>

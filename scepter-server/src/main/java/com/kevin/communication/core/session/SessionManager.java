@@ -2,6 +2,7 @@ package com.kevin.communication.core.session;
 
 import com.alibaba.fastjson.JSON;
 import com.kevin.communication.core.config.ServerConstant;
+import com.kevin.communication.utils.CreateSessionKey;
 import com.kevin.message.protocol.message.HeartBeatMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
@@ -9,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 19:04
  */
-final class SessionManager {
+public class SessionManager {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SessionManager.class);
 
@@ -33,7 +36,7 @@ final class SessionManager {
 
     private static final SessionManager INSTANCE = new SessionManager();
 
-    private Map<SocketAddress, Session> sessionMap = new ConcurrentHashMap<>(ServerConstant.DEFAULT_SESSION_INIT_SIZE);
+    private Map<String, Session> sessionMap = new ConcurrentHashMap<>(ServerConstant.DEFAULT_SESSION_INIT_SIZE);
 
     private SessionManager() {
     }
@@ -41,6 +44,15 @@ final class SessionManager {
     public static SessionManager getInstance() {
         return INSTANCE;
     }
+
+    /**
+     * 获取所有的sessionMap
+     * @return
+     */
+    public Map<String, Session> getSessionMap() {
+        return sessionMap;
+    }
+
 
     /**
      * 创建session
@@ -52,9 +64,12 @@ final class SessionManager {
     public Session createSession(ChannelHandlerContext ctx, HeartBeatMessage msg) {
         String deviceId = msg.getDeviceId();
         LOGGER.info("CONNECT deviceId <{}> for gateway", deviceId);
-        SocketAddress socketAddress = ctx.channel().remoteAddress();
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(ctx);
+        if (key == null) {
+            throw new RuntimeException("找不到key");
+        }
         // 如果该设备已经存在，则关闭掉，重新建立一个新通道
-        Session session = sessionMap.get(socketAddress);
+        Session session = sessionMap.get(key);
         if (session != null) {
             //如果通道是一个，则不管
             if (session.getCtx() != ctx) {
@@ -64,8 +79,8 @@ final class SessionManager {
         }
 
         session = new DefaultSession(ctx, deviceId);
-        LOGGER.info("这是地址" + JSON.toJSONString(socketAddress));
-        sessionMap.put(socketAddress, session);
+        LOGGER.info("这是地址" + key);
+        sessionMap.put(key, session);
         //将设备ID绑定到channel上
         ctx.channel().attr(SessionManager.ATTR_KEY_DEVICEID).set(deviceId);
 
@@ -93,9 +108,9 @@ final class SessionManager {
      * @return Session
      */
     public Session getSession(ChannelHandlerContext ctx) {
-        SocketAddress socketAddress = ctx.channel().remoteAddress();
-        if (socketAddress != null) {
-            return getSession(socketAddress);
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(ctx);
+        if (key != null) {
+            return getSession(key);
         }
         return null;
     }
@@ -103,11 +118,11 @@ final class SessionManager {
     /**
      * 获取session
      *
-     * @param socketAddress - 设备地址
+     * @param ipPort - 设备地址
      * @return Session
      */
-    public Session getSession(SocketAddress socketAddress) {
-        return sessionMap.get(socketAddress);
+    public Session getSession(String ipPort) {
+        return sessionMap.get(ipPort);
     }
 
     /**
@@ -134,10 +149,10 @@ final class SessionManager {
      * @param session - Session
      */
     public void removeSession(Session session) {
-        SocketAddress socketAddress = session.getCtx().channel().remoteAddress();
+        String key = CreateSessionKey.inetSocketAddressByChannelHandlerContexts(session.getCtx());
         //不管怎样，先移除走
-        if (socketAddress != null) {
-            sessionMap.remove(socketAddress);
+        if (key != null) {
+            sessionMap.remove(key);
         }
     }
 
