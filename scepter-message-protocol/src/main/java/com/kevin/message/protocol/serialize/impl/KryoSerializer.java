@@ -3,14 +3,13 @@ package com.kevin.message.protocol.serialize.impl;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.esotericsoftware.kryo.pool.KryoFactory;
 import com.esotericsoftware.kryo.pool.KryoPool;
 import com.kevin.message.protocol.serialize.ISerialize;
 
 import java.io.ByteArrayOutputStream;
 
 /**
- * @author 都市桃源
+ * @author kevin
  * 2018年10月23日 下午3:14:31
  * impl:kryo
  */
