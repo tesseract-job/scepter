@@ -2,7 +2,12 @@ package com.kevin.message.protocol.enums;
 
 
 import com.kevin.message.protocol.serialize.ISerialize;
+import com.kevin.message.protocol.serialize.impl.Hessian2Serializer;
+import com.kevin.message.protocol.serialize.impl.HessianSerializer;
 import com.kevin.message.protocol.serialize.impl.JSONSerialize;
+import com.kevin.message.protocol.serialize.impl.JacksonSerializer;
+import com.kevin.message.protocol.serialize.impl.JdkSerializer;
+import com.kevin.message.protocol.serialize.impl.KryoSerializer;
 
 /**
  * @author: kevin
@@ -12,51 +17,71 @@ import com.kevin.message.protocol.serialize.impl.JSONSerialize;
  */
 public enum SerializeType {
 
-	/**
-	 * json
-	 */
-	JSON(1 , new JSONSerialize()),
-	
-	/**
-	 * java
-	 */
-	JAVABinary(2 , null),
-	
-	/**
-	 * xml
-	 */
-	XML(3 , null);
+    /**
+     * json
+     */
+    JSON(1, new JSONSerialize()),
 
-	/**
-	 * 序列化编码
-	 */
-	private final int code;
-	
-	/**
-	 * 序列化对应的对象实体
-	 */
-	private final ISerialize serialize;
-	
-	private SerializeType(int code , ISerialize serialize) {
-		this.code = code;
-		this.serialize = serialize;
-	}
+    /**
+     * java
+     */
+    JAVABinary(2, new JdkSerializer()),
 
-	public int getCode() {
-		return this.code;
-	}
+    /**
+     * xml
+     */
+    XML(3, null),
 
-	public ISerialize getSerialize() {
-		return serialize;
-	}
+    /**
+     * hessian
+     */
+    HESSIAN(4, new HessianSerializer()),
 
-	public static SerializeType getSerializeType(int code) {
-		for (SerializeType type : values()) {
-			if (type.code == code) {
-				return type;
-			}
-		}
-		return null;
-	}
+    /**
+     * hessian2
+     */
+    HESSIAN2(5, new Hessian2Serializer()),
+
+    /**
+     * jackson
+     */
+    JACKSON(6,new JacksonSerializer()),
+
+    /**
+     * kryo
+     */
+    KRYO(7,new KryoSerializer());
+
+    /**
+     * 序列化编码
+     */
+    private final int code;
+
+    /**
+     * 序列化对应的对象实体
+     */
+    private final ISerialize serialize;
+
+    private SerializeType(int code, ISerialize serialize) {
+        this.code = code;
+        this.serialize = serialize;
+    }
+
+    public int getCode() {
+        return this.code;
+    }
+
+    public ISerialize getSerialize() {
+        return serialize;
+    }
+
+    public static SerializeType getSerializeType(int code) {
+        for (SerializeType type : values()) {
+            if (type.code == code) {
+                return type;
+            }
+        }
+        return null;
+    }
 
 }

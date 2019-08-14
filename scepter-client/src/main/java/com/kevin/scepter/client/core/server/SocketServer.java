@@ -88,16 +88,6 @@ public final class SocketServer {
             }
         });
         LOGGER.info("端口为："+config.getClientPort());
-//        ChannelFuture f = bootstrap.bind(config.getClientPort());
-
-        InetAddress localHost = null;
-        try {
-            localHost = InetAddress.getLocalHost();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-//        bootstrap.connect();
-//        bootstrap.bind(new InetSocketAddress(localHost.getHostAddress(), config.getClientPort()));
         ChannelFuture f = bootstrap.connect();
         f.addListener(new ChannelFutureListener() {
 
