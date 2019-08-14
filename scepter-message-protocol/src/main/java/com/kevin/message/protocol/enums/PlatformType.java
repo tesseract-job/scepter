@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.enums;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 平台类型枚举
  * @updateRemark: 更新项目
  * @date: 2019-07-29 17:49

@@ -4,7 +4,7 @@ import com.google.inject.Injector;
 import com.kevin.scepter.client.core.config.SocketClientConfig;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 全局变量
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:48

@@ -1,11 +1,12 @@
-package com.kevin.message.protocol.serialize;
+package com.kevin.message.protocol.serialize.impl;
 
+import com.kevin.message.protocol.serialize.ISerialize;
 import com.kevin.message.protocol.utility.FastJsonHelper;
 
 import java.nio.charset.Charset;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: JSON序列化接口
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:04

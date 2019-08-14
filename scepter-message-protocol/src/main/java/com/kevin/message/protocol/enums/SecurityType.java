@@ -5,7 +5,7 @@ import com.kevin.message.protocol.security.ISecurity;
 import com.kevin.message.protocol.security.UnSecurity;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 加密类型枚举
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 17:50

@@ -3,7 +3,7 @@ package com.kevin.scepter.client.core.message;
 import com.kevin.scepter.client.core.config.ClientConstant;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 消息id工厂
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:53

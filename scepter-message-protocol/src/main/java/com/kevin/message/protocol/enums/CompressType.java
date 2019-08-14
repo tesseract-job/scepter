@@ -5,7 +5,7 @@ import com.kevin.message.protocol.compress.ICompress;
 import com.kevin.message.protocol.compress.UnCompress;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 压缩算法枚举
  * @updateRemark: 更新项目
  * @date: 2019-07-29 17:31

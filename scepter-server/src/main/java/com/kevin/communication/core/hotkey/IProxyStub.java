@@ -4,7 +4,7 @@ import com.kevin.message.protocol.exception.ServiceFrameException;
 import com.kevin.communication.core.context.BeatContext;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 代理实现类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 19:00

@@ -4,7 +4,7 @@ package com.kevin.scepter.client.core.session;
 import com.kevin.message.protocol.message.IMessage;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: Session连接事件对象
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:57

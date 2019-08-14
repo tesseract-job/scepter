@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.message;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 抽象消息体
  * @updateRemark: 更新日志
  * @date: 2019-07-29 17:57

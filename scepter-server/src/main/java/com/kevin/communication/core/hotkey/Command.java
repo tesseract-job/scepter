@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 接口映射注解
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:55

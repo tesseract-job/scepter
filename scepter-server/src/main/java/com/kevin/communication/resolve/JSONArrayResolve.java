@@ -5,7 +5,7 @@ import com.kevin.message.protocol.utility.FastJsonHelper;
 import com.kevin.communication.core.context.BeatContext;
 
 /**
- * @author liangxuekai
+ * @author kevin
  */
 public class JSONArrayResolve implements IResolve<JSONArray> {
 	

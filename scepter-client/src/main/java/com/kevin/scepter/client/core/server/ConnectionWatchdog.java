@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 链接看门狗
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:56

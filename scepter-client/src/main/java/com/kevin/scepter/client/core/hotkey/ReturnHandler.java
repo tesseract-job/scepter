@@ -10,7 +10,7 @@ import com.kevin.message.protocol.message.ResponseMessage;
 import com.kevin.message.protocol.utility.FastJsonHelper;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 处理返回值
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:52

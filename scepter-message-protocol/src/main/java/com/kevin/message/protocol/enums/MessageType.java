@@ -2,6 +2,7 @@ package com.kevin.message.protocol.enums;
 
 import com.kevin.message.protocol.message.ExceptionMessage;
 import com.kevin.message.protocol.message.HeartBeatMessage;
+import com.kevin.message.protocol.message.PushMessage;
 import com.kevin.message.protocol.message.RequestMessage;
 import com.kevin.message.protocol.message.ResponseMessage;
 import com.kevin.message.protocol.message.StatusMessage;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 消息描述协议类型
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 17:47
@@ -36,7 +37,11 @@ public enum MessageType {
 	/**
 	 *	异常
 	 */
-	Exception(9 , ExceptionMessage.class);
+	Exception(9 , ExceptionMessage.class),
+	/**
+	 * 服务端push消息
+	 */
+	Push(10 , PushMessage.class);
 
 	private static final Map<Integer , MessageType> CODE_TYPE_MAP = new HashMap<>();
 	private static final Map<Class<?> , MessageType> MESSAGE_CLASS_TYPE_MAP = new HashMap<>();

@@ -3,7 +3,7 @@ package com.kevin.scepter.springboot.server.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 服务端配置项目
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-08-05 14:52

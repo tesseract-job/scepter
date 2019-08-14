@@ -3,7 +3,7 @@ package com.kevin.message.protocol.message;
 import com.kevin.message.protocol.enums.MessageType;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 状态消息体
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:00

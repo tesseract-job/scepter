@@ -2,7 +2,7 @@ package com.kevin.message.protocol.compress;
 
 /**
  * 数据压缩/解压接口
- * @author liangxuekai
+ * @author kevin
  *
  */
 public interface ICompress {

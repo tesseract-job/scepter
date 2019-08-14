@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.kevin.message.protocol.utility.FastJsonHelper;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: json数组处理器
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 11:03

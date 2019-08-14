@@ -3,7 +3,7 @@ package com.kevin.communication.core.config;
 import com.kevin.communication.core.hotkey.IProxyFactory;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 服务器端配置参数
  * @updateRemark: 更新项目
  * @date: 2019-07-29 18:50

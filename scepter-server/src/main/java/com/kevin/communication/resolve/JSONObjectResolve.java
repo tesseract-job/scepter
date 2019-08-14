@@ -6,7 +6,7 @@ import com.kevin.communication.core.context.BeatContext;
 import com.kevin.message.protocol.utility.FastJsonHelper;
 
 /**
- * @author liangxuekai
+ * @author kevin
  */
 public class JSONObjectResolve implements IResolve<JSONObject> {
 	

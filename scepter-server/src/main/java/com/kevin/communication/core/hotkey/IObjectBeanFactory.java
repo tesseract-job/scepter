@@ -1,7 +1,7 @@
 package com.kevin.communication.core.hotkey;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 普通对象工厂
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 19:00

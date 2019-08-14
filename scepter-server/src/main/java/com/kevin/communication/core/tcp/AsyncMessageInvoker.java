@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 异步执行业务代码并且返回数据
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 19:05

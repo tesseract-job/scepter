@@ -29,7 +29,7 @@ import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 通信服务
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:56

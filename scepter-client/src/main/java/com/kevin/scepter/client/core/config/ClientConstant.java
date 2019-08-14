@@ -1,7 +1,7 @@
 package com.kevin.scepter.client.core.config;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 客户端常量
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:47

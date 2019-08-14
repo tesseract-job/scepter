@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.serialize;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 数据序列化/反序列化接口
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:04

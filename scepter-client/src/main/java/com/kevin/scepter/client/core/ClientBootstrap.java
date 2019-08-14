@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.net.UnknownHostException;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 客户端启动类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:59

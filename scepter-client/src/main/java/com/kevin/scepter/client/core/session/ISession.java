@@ -11,7 +11,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.io.IOException;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: Session接口
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:57

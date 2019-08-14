@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 消息等待处理类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:53

@@ -3,7 +3,7 @@ package com.kevin.communication.core.hotkey;
 import java.util.Map;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 代理对象工厂
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 19:00

@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 客户端配置类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-08-05 15:07

@@ -4,7 +4,7 @@ package com.kevin.communication.resolve;
 import com.kevin.communication.core.context.BeatContext;
 
 /**
- * @author liangxuekai
+ * @author kevin
  */
 public class ParamCharacterResolve implements IResolve<Character> {
 

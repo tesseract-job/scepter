@@ -1,7 +1,7 @@
 package com.kevin.scepter.client.resolve;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 基础的解析接口
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 11:02

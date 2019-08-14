@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description:
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:50
@@ -50,7 +50,8 @@ public class GuiceModule extends AbstractModule {
                 } else {//本地的代理接口
                     ProxyModule m = (ProxyModule) type.getAnnotation(ProxyModule.class);
                     Class<?> from = m.from();
-                    if (from != void.class) {//如果没有指定from，则获取此类的所有的接口，如果接口==1则直接使用此接口[没有实现此功能]
+                    //如果没有指定from，则获取此类的所有的接口，如果接口==1则直接使用此接口[没有实现此功能]
+                    if (from != void.class) {
                         this.bind((Key<Class<?>>) Key.get(m.from()))
                                 .to((Key<Class<?>>) Key.get(type))
                                 .in(m.singleton() ? Scopes.SINGLETON : Scopes.NO_SCOPE);

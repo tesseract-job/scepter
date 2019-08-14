@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 工厂改为Spring工厂
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-08-05 14:52

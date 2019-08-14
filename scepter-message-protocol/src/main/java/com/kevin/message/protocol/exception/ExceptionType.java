@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 异常返回码
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 17:52
@@ -18,7 +18,7 @@ public enum ExceptionType {
 	NET(2 , "网络连接异常" , NetException.class),
 	TIME_OUT(3 , "接口调用超时出错" , TimeoutException.class),
 	PROTOCOL(4 , "协议错误" , ProtocolException.class),
-	JSON_SERIALIZE_EXCEPTION(5 , "JSON序列化出错" , JSONSerializeException.class),
+	SERIALIZE_EXCEPTION(5 , "序列化出错" , SerializeException.class),
 	PARA_EXCEPTION(6 , "参数传递出错" , ParaException.class),
 	NOT_FOUND_METHOD_EXCEPTION(7 , "没有找到要调用的方法" , NotFoundMethodException.class),
 	DATA_OVER_FLOW_EXCEPTION(8 , "数据溢出" , DataOverFlowException.class),

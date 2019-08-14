@@ -1,7 +1,7 @@
 package com.kevin.scepter.client.core.session;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: Session连接监听器
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:57

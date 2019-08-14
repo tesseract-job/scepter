@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.enums;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 消息来源枚举
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 17:46

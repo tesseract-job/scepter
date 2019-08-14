@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 创建sessionMap的key工具类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-08-06 15:21

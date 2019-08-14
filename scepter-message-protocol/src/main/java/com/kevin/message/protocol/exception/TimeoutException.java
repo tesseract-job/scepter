@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.exception;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 客户端调用超时异常
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 17:56

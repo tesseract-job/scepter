@@ -11,7 +11,7 @@ package com.kevin.message.protocol.security;
  * @Version: 1.0
  */
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 数据加密/解密接口
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:00

@@ -9,7 +9,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 客户端心跳处理类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:55

@@ -6,7 +6,7 @@ import com.kevin.scepter.client.core.hotkey.IAsyncCallBackListener;
 import com.kevin.scepter.client.core.hotkey.IReturnHandlerListener;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 通信数据
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:53

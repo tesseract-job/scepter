@@ -4,7 +4,7 @@ import com.kevin.message.protocol.message.ResponseMessage;
 import com.kevin.communication.core.context.BeatContext;
 
 /**
- * @author liangxuekai
+ * @author kevin
  */
 public class MessageResponseResolve implements IResolve<ResponseMessage> {
 	

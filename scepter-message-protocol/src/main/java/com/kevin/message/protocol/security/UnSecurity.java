@@ -1,7 +1,7 @@
 package com.kevin.message.protocol.security;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 不做任何加解密处理
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-29 18:02

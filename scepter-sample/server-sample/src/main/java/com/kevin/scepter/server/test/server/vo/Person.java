@@ -5,9 +5,9 @@ import lombok.Data;
 /**
  * @projectName: scepter
  * @className: Person
- * @author: liangxuekai
+ * @author: kevin
  * @createDate: 2019-07-30 14:09
- * @updateUser: liangxuekai
+ * @updateUser: kevin
  * @updateDate: 2019-07-30 14:09
  * @updateRemark: 修改内容
  * @version: 1.0

@@ -6,7 +6,7 @@ import com.kevin.message.protocol.message.IMessage;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: Future Interface
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-07-30 10:49

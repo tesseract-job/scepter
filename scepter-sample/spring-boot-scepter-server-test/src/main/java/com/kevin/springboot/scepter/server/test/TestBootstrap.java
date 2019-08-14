@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 /**
- * @author: liangxuekai
+ * @author: kevin
  * @description: 启动类
  * @updateRemark: 修改内容(每次大改都要写修改内容)
  * @date: 2019-08-05 15:46
