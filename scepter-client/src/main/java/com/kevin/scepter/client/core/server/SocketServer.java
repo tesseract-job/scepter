@@ -12,6 +12,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -78,16 +79,22 @@ public final class SocketServer {
                 ChannelPipeline pipeline = ch.pipeline();
 
                 IMessageProcessor messageProcessor = new SocketMessageProcessor();
+
+                ChannelInboundHandlerAdapter clientHeartBeatHandler = Global.getInstance().getClientConfig().getClientHeartBeatHandler();
+                if (clientHeartBeatHandler == null) {
+                    clientHeartBeatHandler = new ClientHeartBeatHandler();
+                }
+
                 pipeline.addLast(new DelimiterBasedFrameDecoder(ProtocolConst.MAX_FRAME_LENGTH, true, Unpooled.copiedBuffer(ProtocolConst.P_END_TAG)));
                 pipeline.addLast(new MessageDecoder());
                 pipeline.addLast(new MessageEncoder());
                 pipeline.addLast(new ConnectionWatchdog(SocketServer.this));
                 pipeline.addLast(new IdleStateHandler(0, config.getWriterIdleTime(), 0, TimeUnit.SECONDS));//每隔30s的时间触发一次userEventTriggered的方法，并且指定IdleState的状态位是WRITER_IDLE
-                pipeline.addLast(new ClientHeartBeatHandler());//实现userEventTriggered方法，并在state是WRITER_IDLE的时候发送一个心跳包到sever端，告诉server端我还活着
+                pipeline.addLast(clientHeartBeatHandler);//实现userEventTriggered方法，并在state是WRITER_IDLE的时候发送一个心跳包到sever端，告诉server端我还活着
                 pipeline.addLast(new ClientMessageHandler(messageProcessor));
             }
         });
-        LOGGER.info("端口为："+config.getClientPort());
+        LOGGER.info("端口为：" + config.getClientPort());
         ChannelFuture f = bootstrap.connect();
         f.addListener(new ChannelFutureListener() {
 

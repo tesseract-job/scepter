@@ -1,5 +1,7 @@
 package com.kevin.scepter.client.core.config;
 
+import io.netty.channel.ChannelInboundHandlerAdapter;
+
 /**
  * @author: kevin
  * @description: 客户端配置
@@ -58,6 +60,16 @@ public final class SocketClientConfig {
      * 心跳空闲超时时间，单位(秒)
      */
     private int idleHeartTimeout = 20;
+
+    private ChannelInboundHandlerAdapter clientHeartBeatHandler;
+
+    public ChannelInboundHandlerAdapter getClientHeartBeatHandler() {
+        return clientHeartBeatHandler;
+    }
+
+    public void setClientHeartBeatHandler(ChannelInboundHandlerAdapter clientHeartBeatHandler) {
+        this.clientHeartBeatHandler = clientHeartBeatHandler;
+    }
 
     public String getDeviceId() {
         return deviceId;
