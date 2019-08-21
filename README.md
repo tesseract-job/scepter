@@ -185,6 +185,55 @@ public class TestCommandImpl implements ITestCommand {
 Global.getInstance().resolve(ITestCommand.class).sayHello();
 ```
 
+
+2019-08-21
+实现自定义心跳类接口
+服务端配置添加
+```java
+SocketServerConfig serviceConfig = new SocketServerConfig();
+serviceConfig.setBasePackages("com.kevin.scepter.server.test.server.command");
+serviceConfig.setPort(9527);
+serviceConfig.setProxyFactory(new DefaultProxyFactory());
+//自定义心跳类处理类
+serviceConfig.setMessageProcessor(new SocketMessageProcessor());
+
+NettyBootstrap boostrap = new NettyBootstrap(serviceConfig);
+boostrap.start();
+```
+服务端配置
+```java
+SocketClientConfig config = new SocketClientConfig();
+config.setDeviceId("100001");
+config.setBasePackages("com.kevin.scepter.client.test.command");
+config.setServerHost("127.0.0.1");
+config.setServerPort(9527);
+config.setRequestTimeout(300);
+config.setWriterIdleTime(5);
+config.setClientPort(1100);
+config.setClientHeartBeatHandler(new ClientHeartBeatHandler());//添加自定义处理类
+System.out.println("连接服务端开启");
+ClientBootstrap client = new ClientBootstrap(config);
+client.start();
+
+
+Thread.sleep(5000);
+
+while (true) {
+    try {
+        String json = "{'deviceCode':'asdfsdfsd','userUnique':'asdfsdfsd'}";
+        String result = Global.getInstance().resolve(ITestCommand.class).getTask(json);
+        System.out.println("getTask接口返回的数据为:" + result);
+        Global.getInstance().resolve(ITestCommand.class).sayHello();
+//				Global.getInstance().resolve(ITestCommand.class).sayHello();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    Thread.sleep(2000L);
+}
+
+```
+
+
 ## 其他
 
 如有问题，随时联系。

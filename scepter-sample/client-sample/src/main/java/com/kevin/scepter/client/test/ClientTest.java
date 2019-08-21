@@ -3,6 +3,7 @@ package com.kevin.scepter.client.test;
 import com.kevin.scepter.client.core.ClientBootstrap;
 import com.kevin.scepter.client.core.config.SocketClientConfig;
 import com.kevin.scepter.client.core.context.Global;
+import com.kevin.scepter.client.core.server.ClientHeartBeatHandler;
 import com.kevin.scepter.client.test.command.ITestCommand;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class ClientTest {
         config.setRequestTimeout(300);
         config.setWriterIdleTime(5);
         config.setClientPort(1100);
+        config.setClientHeartBeatHandler(new ClientHeartBeatHandler());
 
         System.out.println("连接服务端开启");
         ClientBootstrap client = new ClientBootstrap(config);

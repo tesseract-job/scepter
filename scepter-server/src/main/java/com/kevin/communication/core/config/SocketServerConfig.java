@@ -2,6 +2,7 @@ package com.kevin.communication.core.config;
 
 import com.kevin.communication.core.hotkey.IProxyFactory;
 import com.kevin.communication.core.server.IMessageProcessor;
+import com.kevin.communication.core.session.SocketMessageProcessor;
 
 /**
  * @author: kevin
@@ -44,13 +45,13 @@ public final class SocketServerConfig {
 	/**
 	 * 消息处理类
 	 */
-	private IMessageProcessor messageProcessor;
+	private SocketMessageProcessor messageProcessor;
 
-	public IMessageProcessor getMessageProcessor() {
+	public SocketMessageProcessor getMessageProcessor() {
 		return messageProcessor;
 	}
 
-	public void setMessageProcessor(IMessageProcessor messageProcessor) {
+	public void setMessageProcessor(SocketMessageProcessor messageProcessor) {
 		this.messageProcessor = messageProcessor;
 	}
 

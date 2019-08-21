@@ -24,7 +24,6 @@ public class ServerTest {
 		serviceConfig.setPort(9527);
 		serviceConfig.setProxyFactory(new DefaultProxyFactory());
 		serviceConfig.setMessageProcessor(new SocketMessageProcessor());
-
 		NettyBootstrap boostrap = new NettyBootstrap(serviceConfig);
 		boostrap.start();
 		Map<String, Session> sessionMap = SessionManager.getInstance().getSessionMap();
