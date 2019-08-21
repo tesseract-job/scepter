@@ -1,6 +1,7 @@
 package com.kevin.communication.core.tcp;
 
 import com.kevin.communication.core.config.ServerConstant;
+import com.kevin.communication.core.config.SocketServerConfig;
 import com.kevin.communication.core.server.IMessageProcessor;
 import com.kevin.communication.core.session.SocketMessageProcessor;
 import com.kevin.message.protocol.ProtocolConst;
@@ -78,14 +79,17 @@ public class SocketServer implements IServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             IMessageProcessor messageProcessor = new SocketMessageProcessor();
-
+                            IMessageProcessor heartBeatProcessor = Global.getInstance().getServiceConfig().getMessageProcessor();
+                            if (heartBeatProcessor == null) {
+                                heartBeatProcessor = messageProcessor;
+                            }
                             ChannelPipeline pipeline = ch.pipeline();
                             //处理心跳
                             pipeline.addLast(new IdleStateHandler(Global.getInstance().getServiceConfig().getReaderIdleTime(), 0, 0, TimeUnit.SECONDS));
                             pipeline.addLast(new DelimiterBasedFrameDecoder(ProtocolConst.MAX_FRAME_LENGTH, true, Unpooled.copiedBuffer(ProtocolConst.P_END_TAG)));
                             pipeline.addLast(new MessageDecoder());
                             pipeline.addLast(new MessageEncoder());
-                            pipeline.addLast(new ServerHeartBeatHandler(messageProcessor));
+                            pipeline.addLast(new ServerHeartBeatHandler(heartBeatProcessor));
                             pipeline.addLast(new SocketServerHandler(messageProcessor));
                         }
 

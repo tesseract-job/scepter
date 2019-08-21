@@ -59,10 +59,24 @@ public final class ProtocolHelper {
      */
     public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn) {
         HeartBeatMessage m = new HeartBeatMessage(deviceId);
+        m.setDeviceId(deviceId);
         m.setMessageTime(System.currentTimeMillis());
         m.setFstConn(fstConn ? 1 : 0);
-
         return new Protocol(0, fromType, m);
+    }
+    /**
+     * 创建心跳消息协议，自定义消息
+     *
+     * @param fromType - 消息来源
+     * @param deviceId - 设备ID
+     * @param fstConn  - 是否第一次请求
+     * @return Protocol
+     */
+    public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn, HeartBeatMessage heartBeatMessage) {
+        heartBeatMessage.setDeviceId(deviceId);
+        heartBeatMessage.setMessageTime(System.currentTimeMillis());
+        heartBeatMessage.setFstConn(fstConn ? 1 : 0);
+        return new Protocol(0, fromType, heartBeatMessage);
     }
 
     /**

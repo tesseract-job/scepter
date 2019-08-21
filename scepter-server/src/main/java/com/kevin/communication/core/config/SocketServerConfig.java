@@ -1,6 +1,7 @@
 package com.kevin.communication.core.config;
 
 import com.kevin.communication.core.hotkey.IProxyFactory;
+import com.kevin.communication.core.server.IMessageProcessor;
 
 /**
  * @author: kevin
@@ -39,6 +40,19 @@ public final class SocketServerConfig {
 	 * 默认的代理类工厂
 	 */
 	private IProxyFactory proxyFactory;
+
+	/**
+	 * 消息处理类
+	 */
+	private IMessageProcessor messageProcessor;
+
+	public IMessageProcessor getMessageProcessor() {
+		return messageProcessor;
+	}
+
+	public void setMessageProcessor(IMessageProcessor messageProcessor) {
+		this.messageProcessor = messageProcessor;
+	}
 
 	public int getPort() {
 		return port;
