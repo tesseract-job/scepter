@@ -11,6 +11,8 @@ import com.kevin.message.protocol.serialize.ISerialize;
 import com.kevin.message.protocol.serialize.impl.JSONSerialize;
 import com.kevin.message.protocol.utility.ByteConverter;
 
+import java.io.Serializable;
+
 /**
  * 版本一协义定义
  * 1byte(版本号) | 4byte(协义总长度) | 4byte(序列号) | 1byte 消息来源方 | 1byte(消息体类型) | 1byte 压缩算法 | 1byte加密类型 | 1byte 序列化 | 1byte 平台(java,c ...) | n byte消息体 | 5byte(分界符)
@@ -23,7 +25,7 @@ import com.kevin.message.protocol.utility.ByteConverter;
  *
  * @author Kevin
  */
-public class Protocol {
+public class Protocol implements Serializable {
 
     /**
      * 消息总长度

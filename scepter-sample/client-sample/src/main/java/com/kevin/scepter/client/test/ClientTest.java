@@ -35,8 +35,6 @@ public class ClientTest {
                 String json = "{'deviceCode':'asdfsdfsd','userUnique':'asdfsdfsd'}";
                 String result = Global.getInstance().resolve(ITestCommand.class).getTask(json);
                 System.out.println("getTask接口返回的数据为:" + result);
-                Global.getInstance().resolve(ITestCommand.class).sayHello();
-//				Global.getInstance().resolve(ITestCommand.class).sayHello();
             } catch (Exception e) {
                 e.printStackTrace();
             }

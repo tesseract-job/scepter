@@ -9,31 +9,31 @@ import com.kevin.message.protocol.enums.MessageType;
  * @date: 2019-07-29 17:58
  */
 public class HeartBeatMessage extends DefaultMessage {
-	
-	/**
-	 * 是否第一次请求,1是，0否
-	 */
-	private int fstConn;
-	
-	public HeartBeatMessage() {
-		
-	}
-	
-	public HeartBeatMessage(String deviceId) {
-		this.deviceId = deviceId;
-	}
-	
-	@Override
-	public MessageType messageType() {
-		return MessageType.HeartBeat;
-	}
 
-	public int getFstConn() {
-		return fstConn;
-	}
+    /**
+     * 是否第一次请求,1是，0否
+     */
+    private int fstConn;
 
-	public void setFstConn(int fstConn) {
-		this.fstConn = fstConn;
-	}
+    public HeartBeatMessage() {
+
+    }
+
+    public HeartBeatMessage(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    @Override
+    public MessageType messageType() {
+        return MessageType.HeartBeat;
+    }
+
+    public int getFstConn() {
+        return fstConn;
+    }
+
+    public void setFstConn(int fstConn) {
+        this.fstConn = fstConn;
+    }
 
 }

@@ -6,6 +6,7 @@ import com.kevin.communication.core.hotkey.DefaultProxyFactory;
 import com.kevin.communication.core.session.Session;
 import com.kevin.communication.core.session.SessionManager;
 import com.kevin.communication.core.session.SocketMessageProcessor;
+import com.kevin.message.protocol.enums.SerializeType;
 
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class ServerTest {
 		serviceConfig.setPort(9527);
 		serviceConfig.setProxyFactory(new DefaultProxyFactory());
 		serviceConfig.setMessageProcessor(new SocketMessageProcessor());
+		serviceConfig.setSerializeType(SerializeType.HESSIAN2);
 		NettyBootstrap boostrap = new NettyBootstrap(serviceConfig);
 		boostrap.start();
 		Map<String, Session> sessionMap = SessionManager.getInstance().getSessionMap();

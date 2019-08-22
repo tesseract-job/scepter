@@ -1,12 +1,14 @@
 package com.kevin.message.protocol.message;
 
+import java.io.Serializable;
+
 /**
  * @author: kevin
  * @description: 抽象消息体
  * @updateRemark: 更新日志
  * @date: 2019-07-29 17:57
  */
-public abstract class DefaultMessage implements IMessage {
+public abstract class DefaultMessage implements IMessage, Serializable {
 	
 	protected String deviceId;
 	

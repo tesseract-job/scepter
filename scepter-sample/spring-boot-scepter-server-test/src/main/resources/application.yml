@@ -12,3 +12,4 @@ socket:
     enable: true
     port: 9527
     basePackages: com.kevin.springboot.scepter.server.test.command
+    serializeType: 5

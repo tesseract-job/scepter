@@ -35,7 +35,20 @@ public class ServerProperties {
 	 * 慢方法的耗时阈值，单位(毫秒)
 	 */
 	private long slowMethodMillis = 1000L;
-	
+
+	/**
+	 * 序列化协议
+	 */
+	private Integer serializeType;
+
+	public Integer getSerializeType() {
+		return serializeType;
+	}
+
+	public void setSerializeType(Integer serializeType) {
+		this.serializeType = serializeType;
+	}
+
 	public int getPort() {
 		return port;
 	}

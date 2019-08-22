@@ -3,6 +3,7 @@ package com.kevin.scepter.springboot.server.config;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.kevin.communication.core.NettyBootstrap;
 import com.kevin.communication.core.config.SocketServerConfig;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.scepter.springboot.server.hotkey.SpringProxyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -71,7 +74,12 @@ public class ServerConfiguration {
         serviceConfig.setReaderIdleTime(serverProperties.getReaderIdleTime());
         serviceConfig.setSlowMethod(serverProperties.isSlowMethod());
         serviceConfig.setSlowMethodMillis(serverProperties.getSlowMethodMillis());
-
+        Integer serializeType = serverProperties.getSerializeType();
+        SerializeType[] values = SerializeType.values();
+        Optional<SerializeType> first = Arrays.stream(values).filter(serializeTypeValue -> serializeTypeValue.getCode() == serializeType).findFirst();
+        if (first.isPresent()) {
+            serviceConfig.setSerializeType(first.get());
+        }
         NettyBootstrap boostrap = new NettyBootstrap(serviceConfig);
 
         //必须通过一个线程来启动，否则springboot启动类会被卡住
