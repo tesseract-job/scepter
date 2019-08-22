@@ -1,6 +1,7 @@
 package com.kevin.scepter.springboot.client.config;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.scepter.client.core.ClientBootstrap;
 import com.kevin.scepter.client.core.config.SocketClientConfig;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -58,8 +61,12 @@ public class ClientConfiguration {
         config.setServerPort(clientProperties.getServerPort());
         config.setRequestTimeout(clientProperties.getRequestTimeout());
         config.setWriterIdleTime(clientProperties.getWriterIdleTime());
-        config.setClientPort(clientProperties.getClientPort());
-
+        Integer serializeType = clientProperties.getSerializeType();
+        SerializeType[] values = SerializeType.values();
+        Optional<SerializeType> first = Arrays.stream(values).filter(serializeTypeValue -> serializeTypeValue.getCode() == serializeType).findFirst();
+        if (first.isPresent()) {
+            config.setSerializeType(first.get());
+        }
         ClientBootstrap client = new ClientBootstrap(config);
 
         //必须通过一个线程来启动，否则springboot启动类会被卡住

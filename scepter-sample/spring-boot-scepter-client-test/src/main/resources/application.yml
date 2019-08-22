@@ -14,5 +14,5 @@ socket:
     serverPort: 9527
     requestTimeout: 500
     writerIdleTime: 5
-    clientPort: 9999
+    serializeType: 1
     basePackages: com.kevin.springboot.scepter.client.test.command

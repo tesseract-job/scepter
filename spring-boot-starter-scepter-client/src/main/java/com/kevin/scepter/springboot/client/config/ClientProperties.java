@@ -35,10 +35,19 @@ public class ClientProperties {
      * 客户端写空闲超时时间设定(秒)。具体作用就是如果write()方法超过writerIdleTime时间未被调用则会触发超时事件调用userEventTrigger()方法（向服务端发送心跳检测）
      */
     private Integer writerIdleTime;
+
     /**
-     * 客户端端口（未生效）
+     * 序列化协议
      */
-    private Integer clientPort;
+    private Integer serializeType;
+
+    public Integer getSerializeType() {
+        return serializeType;
+    }
+
+    public void setSerializeType(Integer serializeType) {
+        this.serializeType = serializeType;
+    }
 
     public String getDeviceId() {
         return deviceId;
@@ -86,14 +95,6 @@ public class ClientProperties {
 
     public void setWriterIdleTime(Integer writerIdleTime) {
         this.writerIdleTime = writerIdleTime;
-    }
-
-    public Integer getClientPort() {
-        return clientPort;
-    }
-
-    public void setClientPort(Integer clientPort) {
-        this.clientPort = clientPort;
     }
 
 }

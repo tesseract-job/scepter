@@ -95,7 +95,7 @@ public final class SocketServer {
                 pipeline.addLast(new ClientMessageHandler(messageProcessor));
             }
         });
-        LOGGER.info("端口为：" + config.getClientPort());
+//        LOGGER.info("端口为：" + config.getClientPort());
         ChannelFuture f = bootstrap.connect();
         f.addListener(new ChannelFutureListener() {
 
