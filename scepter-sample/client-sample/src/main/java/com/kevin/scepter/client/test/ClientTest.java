@@ -1,5 +1,6 @@
 package com.kevin.scepter.client.test;
 
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.scepter.client.core.ClientBootstrap;
 import com.kevin.scepter.client.core.config.SocketClientConfig;
 import com.kevin.scepter.client.core.context.Global;
@@ -18,6 +19,7 @@ public class ClientTest {
         config.setServerPort(9527);
         config.setRequestTimeout(300);
         config.setWriterIdleTime(5);
+        config.setSerializeType(SerializeType.HESSIAN2);
 //        config.setClientPort(1100);
         config.setClientHeartBeatHandler(new ClientHeartBeatHandler());
 
