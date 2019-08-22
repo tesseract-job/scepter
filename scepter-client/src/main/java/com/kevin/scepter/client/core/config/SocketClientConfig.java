@@ -1,5 +1,6 @@
 package com.kevin.scepter.client.core.config;
 
+import com.kevin.message.protocol.enums.SerializeType;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
@@ -61,7 +62,27 @@ public final class SocketClientConfig {
      */
     private int idleHeartTimeout = 20;
 
+    /**
+     * 自定义心跳处理器
+     */
     private ChannelInboundHandlerAdapter clientHeartBeatHandler;
+
+    /**
+     * 序列化方式，目前只支持JSON,具体数据，查看以下枚举类,如果不填默认JSON
+     * {@Link com.kevin.message.protocol.enums.SerializeType}
+     */
+    private SerializeType serializeType;
+
+    public SerializeType getSerializeType() {
+        if (serializeType == null) {
+            serializeType = SerializeType.JSON;
+        }
+        return serializeType;
+    }
+
+    public void setSerializeType(SerializeType serializeType) {
+        this.serializeType = serializeType;
+    }
 
     public ChannelInboundHandlerAdapter getClientHeartBeatHandler() {
         return clientHeartBeatHandler;

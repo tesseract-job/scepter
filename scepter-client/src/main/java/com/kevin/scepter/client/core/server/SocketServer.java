@@ -2,6 +2,7 @@ package com.kevin.scepter.client.core.server;
 
 import com.kevin.message.protocol.ProtocolConst;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.message.MessageDecoder;
 import com.kevin.message.protocol.message.MessageEncoder;
 import com.kevin.message.protocol.utility.ProtocolHelper;
@@ -105,8 +106,9 @@ public final class SocketServer {
                 reConnection = false;
                 if (future.isDone() && future.isSuccess()) {
                     LOGGER.info("---- connection success-------");
+                    SerializeType serializeType = Global.getInstance().getClientConfig().getSerializeType();
                     //服务器连接成功，立马发送一条心跳消息
-                    future.channel().writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.CLIENT, config.getDeviceId(), true));
+                    future.channel().writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.CLIENT, config.getDeviceId(), true,serializeType));
                 } else {
                     future.cause().printStackTrace();
                     try {

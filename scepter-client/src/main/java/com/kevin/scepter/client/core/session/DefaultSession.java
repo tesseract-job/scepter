@@ -3,6 +3,7 @@ package com.kevin.scepter.client.core.session;
 import com.kevin.message.protocol.Protocol;
 import com.kevin.message.protocol.enums.DeviceStatus;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.exception.TimeoutException;
 import com.kevin.message.protocol.message.IMessage;
 import com.kevin.message.protocol.utility.ProtocolHelper;
@@ -134,8 +135,9 @@ public class DefaultSession implements ISession {
 
         LOGGER.info("notify server status message - deviceId: " + deviceId + ",current status " + this.status.name() + ",change status : " + status.name());
 
+        SerializeType serializeType = Global.getInstance().getClientConfig().getSerializeType();
         //此处需要发送状态变更到客户端
-        ctx.writeAndFlush(ProtocolHelper.createStatusMessage(MessageFromType.CLIENT, deviceId, status)).sync();
+        ctx.writeAndFlush(ProtocolHelper.createStatusMessage(MessageFromType.CLIENT, deviceId, status,serializeType)).sync();
         //修改设备状态
         this.status = status;
     }

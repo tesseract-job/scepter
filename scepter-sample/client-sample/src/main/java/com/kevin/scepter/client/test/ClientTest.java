@@ -18,7 +18,7 @@ public class ClientTest {
         config.setServerPort(9527);
         config.setRequestTimeout(300);
         config.setWriterIdleTime(5);
-        config.setClientPort(1100);
+//        config.setClientPort(1100);
         config.setClientHeartBeatHandler(new ClientHeartBeatHandler());
 
         System.out.println("连接服务端开启");

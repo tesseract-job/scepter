@@ -1,10 +1,12 @@
 package com.kevin.communication.core.session;
 
+import com.kevin.communication.core.context.Global;
 import com.kevin.communication.core.server.IMessageProcessor;
 import com.kevin.communication.core.tcp.AsyncMessageInvoker;
 import com.kevin.message.protocol.Protocol;
 import com.kevin.message.protocol.enums.DeviceStatus;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.message.HeartBeatMessage;
 import com.kevin.message.protocol.message.StatusMessage;
 import com.kevin.message.protocol.utility.ProtocolHelper;
@@ -49,8 +51,9 @@ public class SocketMessageProcessor implements IMessageProcessor {
         LOGGER.info("deviceId {} register!", msg.getDeviceId());
 
         Session session = SessionManager.getInstance().createSession(ctx, msg);
+        SerializeType serializeType = Global.getInstance().getServiceConfig().getSerializeType();
         //发送心跳回应
-        ctx.writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.SERVER, session.getDeviceId(), true)).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
+        ctx.writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.SERVER, session.getDeviceId(), true,serializeType)).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
     }
 
     /**
@@ -68,7 +71,8 @@ public class SocketMessageProcessor implements IMessageProcessor {
             if (!keepAlive) {
                 processReceiveDisconnect(ctx);
             } else {
-                ctx.writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.SERVER, session.getDeviceId(), false)).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
+                SerializeType serializeType = Global.getInstance().getServiceConfig().getSerializeType();
+                ctx.writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.SERVER, session.getDeviceId(), false,serializeType)).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
             }
         }
     }

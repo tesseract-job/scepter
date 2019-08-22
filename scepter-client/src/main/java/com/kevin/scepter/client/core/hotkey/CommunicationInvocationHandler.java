@@ -2,6 +2,7 @@ package com.kevin.scepter.client.core.hotkey;
 
 import com.kevin.message.protocol.Protocol;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.message.IMessage;
 import com.kevin.message.protocol.message.RequestMessage;
 import com.kevin.message.protocol.utility.FastJsonHelper;
@@ -195,8 +196,8 @@ public class CommunicationInvocationHandler implements InvocationHandler {
 
             request.setBody(FastJsonHelper.toJson(data));
         }
-
-        return new Protocol(MessageIdFactory.createMessageId(), MessageFromType.CLIENT, request);
+        SerializeType serializeType = Global.getInstance().getClientConfig().getSerializeType();
+        return new Protocol(MessageIdFactory.createMessageId(), MessageFromType.CLIENT, request, serializeType);
     }
 
 }

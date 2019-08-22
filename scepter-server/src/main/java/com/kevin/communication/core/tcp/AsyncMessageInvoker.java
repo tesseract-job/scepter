@@ -2,6 +2,7 @@ package com.kevin.communication.core.tcp;
 
 import com.kevin.communication.utils.ExceptionFactory;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.exception.ServiceFrameException;
 import com.kevin.message.protocol.utility.ProtocolHelper;
 import com.kevin.communication.core.config.ServerConstant;
@@ -87,12 +88,12 @@ public class AsyncMessageInvoker implements IInvokerHandler {
                     }
                 } catch (ServiceFrameException e) {
                     LOGGER.error(e.getMessage(), e);
-
-                    context.writeMessage(ProtocolHelper.createExceptionMessage(MessageFromType.SERVER, e));
+                    SerializeType serializeType = Global.getInstance().getServiceConfig().getSerializeType();
+                    context.writeMessage(ProtocolHelper.createExceptionMessage(MessageFromType.SERVER, e, serializeType));
                 } catch (Exception e) {
                     LOGGER.error(e.getMessage(), e);
-
-                    context.writeMessage(ProtocolHelper.createExceptionMessage(context.getMessageId(), MessageFromType.SERVER, context.getDeviceId(), e));
+                    SerializeType serializeType = Global.getInstance().getServiceConfig().getSerializeType();
+                    context.writeMessage(ProtocolHelper.createExceptionMessage(context.getMessageId(), MessageFromType.SERVER, context.getDeviceId(), e, serializeType));
                 } finally {
                     BeatContext.clearContext();//清除上下文
                 }

@@ -1,6 +1,7 @@
 package com.kevin.scepter.client.core.server;
 
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.utility.ProtocolHelper;
 import com.kevin.scepter.client.core.context.Global;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,8 +22,9 @@ public class ClientHeartBeatHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleState state = ((IdleStateEvent) evt).state();
             if (state == IdleState.WRITER_IDLE) {
+                SerializeType serializeType = Global.getInstance().getClientConfig().getSerializeType();
                 ctx.writeAndFlush(ProtocolHelper.createHeartBeatMessage(MessageFromType.CLIENT,
-                        Global.getInstance().getClientConfig().getDeviceId(), false));
+                        Global.getInstance().getClientConfig().getDeviceId(), false,serializeType));
             }
         } else {
             super.userEventTriggered(ctx, evt);

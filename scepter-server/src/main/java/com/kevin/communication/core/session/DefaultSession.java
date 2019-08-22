@@ -1,7 +1,9 @@
 package com.kevin.communication.core.session;
 
+import com.kevin.communication.core.context.Global;
 import com.kevin.message.protocol.enums.DeviceStatus;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.utility.ProtocolHelper;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -71,8 +73,9 @@ public class DefaultSession implements Session {
         }
         LOGGER.info("notify client status message -  - deviceId: " + this.deviceId + ",current status " + this.status.name() + ",change status : " + status.name());
 
+        SerializeType serializeType = Global.getInstance().getServiceConfig().getSerializeType();
         //此处需要发送状态变更到客户端
-        ctx.writeAndFlush(ProtocolHelper.createStatusMessage(MessageFromType.SERVER, this.deviceId, status)).sync();
+        ctx.writeAndFlush(ProtocolHelper.createStatusMessage(MessageFromType.SERVER, this.deviceId, status,serializeType)).sync();
         //修改设备状态
         this.status = status;
     }

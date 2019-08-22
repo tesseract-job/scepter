@@ -4,6 +4,7 @@ import com.kevin.message.protocol.Protocol;
 import com.kevin.message.protocol.ProtocolConst;
 import com.kevin.message.protocol.enums.DeviceStatus;
 import com.kevin.message.protocol.enums.MessageFromType;
+import com.kevin.message.protocol.enums.SerializeType;
 import com.kevin.message.protocol.exception.ExceptionType;
 import com.kevin.message.protocol.exception.ServiceFrameException;
 import com.kevin.message.protocol.message.ExceptionMessage;
@@ -50,7 +51,7 @@ public final class ProtocolHelper {
     }
 
     /**
-     * 创建心跳消息协议
+     * 创建默认心跳消息协议
      *
      * @param fromType - 消息来源
      * @param deviceId - 设备ID
@@ -58,12 +59,25 @@ public final class ProtocolHelper {
      * @return Protocol
      */
     public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn) {
+        return createHeartBeatMessage(fromType, deviceId, fstConn, SerializeType.JSON);
+    }
+
+    /**
+     * 创建心跳消息协议
+     * @param fromType - 消息来源
+     * @param deviceId - 设备ID
+     * @param fstConn - 是否第一次请求
+     * @param serializeType - 序列化协议类型
+     * @return Protocol
+     */
+    public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn, SerializeType serializeType) {
         HeartBeatMessage m = new HeartBeatMessage(deviceId);
         m.setDeviceId(deviceId);
         m.setMessageTime(System.currentTimeMillis());
         m.setFstConn(fstConn ? 1 : 0);
-        return new Protocol(0, fromType, m);
+        return new Protocol(0, fromType, m, serializeType);
     }
+
     /**
      * 创建心跳消息协议，自定义消息
      *
@@ -72,12 +86,12 @@ public final class ProtocolHelper {
      * @param fstConn  - 是否第一次请求
      * @return Protocol
      */
-    public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn, HeartBeatMessage heartBeatMessage) {
-        heartBeatMessage.setDeviceId(deviceId);
-        heartBeatMessage.setMessageTime(System.currentTimeMillis());
-        heartBeatMessage.setFstConn(fstConn ? 1 : 0);
-        return new Protocol(0, fromType, heartBeatMessage);
-    }
+//    public static Protocol createHeartBeatMessage(MessageFromType fromType, String deviceId, boolean fstConn, HeartBeatMessage heartBeatMessage) {
+//        heartBeatMessage.setDeviceId(deviceId);
+//        heartBeatMessage.setMessageTime(System.currentTimeMillis());
+//        heartBeatMessage.setFstConn(fstConn ? 1 : 0);
+//        return new Protocol(0, fromType, heartBeatMessage);
+//    }
 
     /**
      * 创建异常消息协议
@@ -85,9 +99,10 @@ public final class ProtocolHelper {
      * @param fromType - 消息来源
      * @param deviceId - 设备ID
      * @param ex       - 异常类
+     * @param serializeType - 序列化协议类型
      * @return Protocol
      */
-    public static Protocol createExceptionMessage(int messageId, MessageFromType fromType, String deviceId, Throwable ex) {
+    public static Protocol createExceptionMessage(int messageId, MessageFromType fromType, String deviceId, Throwable ex, SerializeType serializeType) {
         ExceptionMessage m = new ExceptionMessage(ExceptionType.OTHER_EXCEPTION.getCode());
         m.setDeviceId(deviceId);
         m.setMessageTime(System.currentTimeMillis());
@@ -111,7 +126,20 @@ public final class ProtocolHelper {
         m.setFromIP("");
         m.setToIP("");
 
-        return new Protocol(messageId, fromType, m);
+        return new Protocol(messageId, fromType, m, serializeType);
+    }
+
+    /**
+     * 创建默认异常消息协议
+     * 默认序列化协议为JSON
+     *
+     * @param fromType - 消息来源
+     * @param deviceId - 设备ID
+     * @param ex       - 异常类
+     * @return Protocol
+     */
+    public static Protocol createExceptionMessage(int messageId, MessageFromType fromType, String deviceId, Throwable ex) {
+        return createExceptionMessage(messageId, fromType, deviceId, ex, SerializeType.JSON);
     }
 
     /**
@@ -119,9 +147,10 @@ public final class ProtocolHelper {
      *
      * @param fromType - 消息来源
      * @param ex       - 异常类
+     * @param serializeType - 序列化协议类型
      * @return Protocol
      */
-    public static Protocol createExceptionMessage(MessageFromType fromType, ServiceFrameException ex) {
+    public static Protocol createExceptionMessage(MessageFromType fromType, ServiceFrameException ex, SerializeType serializeType) {
         ExceptionMessage m = new ExceptionMessage(ex.getExType() != null ? ex.getExType().getCode() : ExceptionType.OTHER_EXCEPTION.getCode());
         m.setDeviceId(ex.getDeviceId());
         m.setMessageTime(System.currentTimeMillis());
@@ -160,7 +189,19 @@ public final class ProtocolHelper {
         m.setFromIP(ex.getFromIP());
         m.setToIP(ex.getToIP());
 
-        return new Protocol(ex.getMessageId(), fromType, m);
+        return new Protocol(ex.getMessageId(), fromType, m, serializeType);
+    }
+
+    /**
+     * 创建默认异常消息协议
+     * 默认序列化协议为JSON
+     *
+     * @param fromType - 消息来源
+     * @param ex       - 异常类
+     * @return Protocol
+     */
+    public static Protocol createExceptionMessage(MessageFromType fromType, ServiceFrameException ex) {
+        return createExceptionMessage(fromType, ex, SerializeType.JSON);
     }
 
 
@@ -182,8 +223,8 @@ public final class ProtocolHelper {
     }
 
     /**
-     * 状态状态变更协议
-     *
+     * 创建默认状态变更协议
+     * 默认序列化协议为JSON
      * @param fromType - 消息来源
      * @param deviceId - 设备ID
      * @param status   - 设备状态
@@ -193,24 +234,39 @@ public final class ProtocolHelper {
         StatusMessage m = new StatusMessage(deviceId, status.getCode());
         m.setMessageTime(System.currentTimeMillis());
 
-        return new Protocol(0, fromType, m);
+        return createStatusMessage(fromType,deviceId,status,SerializeType.JSON);
     }
 
     /**
-     * 创建服务端向客户端push的消息处理
+     * 状态状态变更协议
      *
-     * @param deviceId
-     * @param mapping
-     * @param data
-     * @return
+     * @param fromType - 消息来源
+     * @param deviceId - 设备ID
+     * @param status   - 设备状态
+     * @param serializeType - 序列化协议类型
+     * @return Protocol
      */
-    private Protocol createPushMessage(String deviceId, String mapping, Object data) {
-        PushMessage push = new PushMessage(deviceId, mapping);
-        push.setMessageTime(System.currentTimeMillis());
-        push.setBody(FastJsonHelper.toJson(data));
-        return new Protocol(MessageIdFactory.createMessageId(), MessageFromType.SERVER, push);
+    public static Protocol createStatusMessage(MessageFromType fromType, String deviceId, DeviceStatus status, SerializeType serializeType) {
+        StatusMessage m = new StatusMessage(deviceId, status.getCode());
+        m.setMessageTime(System.currentTimeMillis());
+
+        return new Protocol(0, fromType, m,serializeType);
     }
 
+//    /**
+//     * 创建服务端向客户端push的消息处理
+//     *
+//     * @param deviceId
+//     * @param mapping
+//     * @param data
+//     * @return
+//     */
+//    private Protocol createPushMessage(String deviceId, String mapping, Object data) {
+//        PushMessage push = new PushMessage(deviceId, mapping);
+//        push.setMessageTime(System.currentTimeMillis());
+//        push.setBody(FastJsonHelper.toJson(data));
+//        return new Protocol(MessageIdFactory.createMessageId(), MessageFromType.SERVER, push);
+//    }
     private ProtocolHelper() {
 
     }

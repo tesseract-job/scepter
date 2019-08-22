@@ -3,6 +3,7 @@ package com.kevin.communication.core.config;
 import com.kevin.communication.core.hotkey.IProxyFactory;
 import com.kevin.communication.core.server.IMessageProcessor;
 import com.kevin.communication.core.session.SocketMessageProcessor;
+import com.kevin.message.protocol.enums.SerializeType;
 
 /**
  * @author: kevin
@@ -46,6 +47,23 @@ public final class SocketServerConfig {
 	 * 消息处理类
 	 */
 	private SocketMessageProcessor messageProcessor;
+
+	/**
+	 * 序列化方式，目前只支持JSON,具体数据，查看以下枚举类,如果不填默认JSON
+	 * {@Link com.kevin.message.protocol.enums.SerializeType}
+	 */
+	private SerializeType serializeType;
+
+	public SerializeType getSerializeType() {
+		if (serializeType == null) {
+			serializeType = SerializeType.JSON;
+		}
+		return serializeType;
+	}
+
+	public void setSerializeType(SerializeType serializeType) {
+		this.serializeType = serializeType;
+	}
 
 	public SocketMessageProcessor getMessageProcessor() {
 		return messageProcessor;
